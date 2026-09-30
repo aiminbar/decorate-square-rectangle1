@@ -1,0 +1,11 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>أزخرف بالمربع والمستطيل</title></head><body><main class="page" style="background-image:url('bg-shapes.png')"><div class="board"><div class="title">أَتَعَرَّفُ الْمُرَبَّعَ وَالْمُسْتَطِيلَ</div><div id="s1"><div class="row"><div><div class="shape sq pink" onclick="speak('هَذَا مُرَبَّعٌ.',this)"></div><div class="msg">الْمُرَبَّعُ</div></div><div><div class="shape rect sky" onclick="speak('هَذَا مُسْتَطِيلٌ.',this)"></div><div class="msg">الْمُسْتَطِيلُ</div></div></div><button class="btn" onclick="compare()">لِنُقارِنْ 👀</button></div><div id="s2" class="hidden"><video class="character" src="shapes-compare.mp4" autoplay controls></video><div class="row"><div class="shape sq pink"></div><div class="shape rect sky"></div></div><button class="btn" onclick="discover()">نَكْتَشِفُ الْفَرْقَ</button><button class="btn alt" onclick="drawShapes()">هَيَّا نَرْسُمُ ✏️</button></div><div id="s3" class="hidden"><div class="msg">تَتَبَّعِي الشَّكْلَ.</div><div class="row"><div class="shape sq dotted"></div><div class="shape rect dotted"></div></div><button class="btn pinkb" onclick="clearPen()">إِعادَةُ الرَّسْمِ</button></div></div></main><script src="common.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{document.body.insertAdjacentHTML('beforeend',nav('02-warm-up.html','04-compare.html'));window.speak=(t,e)=>{e.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],500);speechSynthesis.speak(new SpeechSynthesisUtterance(t))};window.compare=()=>{s1.classList.add('hidden');s2.classList.remove('hidden')};window.discover=()=>{document.querySelectorAll('#s2 .shape').forEach(x=>x.animate([{outline:'0 solid gold'},{outline:'10px solid gold'},{outline:'0 solid gold'}],1000))};window.drawShapes=()=>{
+  // الانتقال أولاً إلى مساحة التدريب على الرسم
+  s2.classList.add('hidden');
+  s3.classList.remove('hidden');
+  // فتح قلم المعلمة بعد ظهور الأشكال المنقطة حتى لا تمنع طبقة الرسم ضغطة الزر نفسها
+  requestAnimationFrame(()=>{
+    mode('pen');
+    const tools=document.querySelector('.tools');
+    if(tools) tools.classList.add('open');
+  });
+}});</script></body></html>
